@@ -7,13 +7,19 @@ body {
 main {
     color:  darkgreen;
     font-family: Arial;
-    margin: 10px;
+    margin: 10px 20px 38.4px;
 }
 footer {
     background-color: black;
     color:  lightgreen;
     font-family: Arial;
     margin: 0px;
+    padding: 10px;
+    text-align: right;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
 }
 header {
     background-color: black;
