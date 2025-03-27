@@ -21,3 +21,28 @@ header {
     font-family: Arial;
     margin: 0px;
 }
+a {
+    color: green;
+    text-decoration: none;
+}
+a:link {
+    color: blue;
+    text-decoration: underline;
+    text-shadow: 1px 1px 2px gray;
+}
+
+a:visited {
+    color: purple;
+    text-decoration: underline;
+    text-shadow: 1px 1px 2px darkgray;
+}
+a:hover {
+    color: red;
+    text-decoration: underline;
+    background-color: black;
+    text-shadow: 5px 5px 5px black;
+}
+a:active {
+    color: black;
+    opacity: 0.3;
+}
