@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Фисенко Роман Алексеевич. Лабораторная 3</title>
+        <link rel="stylesheet" href="..\main.css">
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon-16x16.png">
+        <link rel="icon" href="favicon-32x32.png">
+        <style>
+            div {
+                width: 300px;
+                height: 70px;
+                line-height: 70px;
+                text-align: center;
+                background-color: white;
+                border: 1px dotted darkgreen;
+                margin: 15px;
+            }
+            .postion-relative {
+                position: relative;
+                left: 150px;
+                top: -130px;
+                z-index: -1;
+            }
+            .postion-relative:hover {
+                z-index: 1;
+                cursor: pointer;
+            }
+            .position-absolute {
+                position: absolute;
+                left: 300px;
+            }
+            .position-absolute:hover {
+                width: 400px;
+                height: 140px;
+                background-color: aqua;
+                color: blue;
+                box-shadow: 1px 1px 15px red;
+            }
+        </style>
+    </head>
+
+    <body>
+        <header>
+            НГТУ, ФБ, Лабораторная работа 3
+        </header>
+
+        <main>
+            <div>static</div>
+            <div>static</div>
+            <div class="postion-relative">relative</div>
+            <div>static</div>
+            <div>static</div>
+            <div class="position-absolute">absolute</div>
+            <div>static</div>
+            <div>static</div>
+            <div>static</div>
+            <div>static</div>
+        </main>
+
+        <footer>
+            &copy Роман Фисенко, ФБИ-31, 2 курс, 2025
+        </footer>
+    </body>
+</html>
