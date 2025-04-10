@@ -27,8 +27,8 @@ header {
     font-family: Arial;
     margin: 0px;
     padding: 10px;
-    text-align: right;
-    position: fixed;
+    text-align: left;
+    position: sticky;
     bottom: 0;
     right: 0;
     left: 0;
