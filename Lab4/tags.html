@@ -14,29 +14,55 @@
             border-radius: 8px;
             cursor: pointer;
             z-index: 1;
+            animation: move 10s infinite linear;
+            animation-play-state: running;
             }
 
             .tag:hover {
                 text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
                 z-index: 100;
                 font-size: 120px;
+                animation-play-state: paused;
             }
 
-            .tag1  { top: 10%; left: 20%; color: #ff0000; font-size: 100px; transform: rotate(-10deg); }
-            .tag2  { top: 25%; left: 50%; color: #0091ff; font-size: 70px; transform: rotate(15deg); }
-            .tag3  { top: 40%; left: 30%; color: #00ff37; font-size: 100px; transform: rotate(-5deg); }
-            .tag4  { top: 15%; left: 70%; color: #ffff00; font-size: 70px; transform: rotate(8deg); }
-            .tag5  { top: 60%; left: 10%; color: #ff8800; font-size: 100px; transform: rotate(-12deg); }
-            .tag6  { top: 70%; left: 50%; color: #8c00ff; font-size: 70px; transform: rotate(50deg); }
-            .tag7  { top: 35%; left: 70%; color: #178800; font-size: 100px; transform: rotate(-60deg); }
-            .tag8  { top: 50%; left: 50%; color: #001941; font-size: 70px; transform: rotate(12deg); }
-            .tag9  { top: 65%; left: 25%; color: #8c4d00; font-size: 100px; transform: rotate(-8deg); }
-            .tag10 { top: 20%; left: 40%; color: #4b4e00; font-size: 70px; transform: rotate(10deg); }
-            .tag11 { top: 75%; left: 50%; color: #e000e0; font-size: 100px; transform: rotate(3deg); }
-            .tag12 { top: 5%; left: 45%; color: #390000; font-size: 70px; transform: rotate(-7deg); }
-            .tag13 { top: 75%; left: 30%; color: #00a7b7; font-size: 100px; transform: rotate(6deg); }
-            .tag14 { top: 45%; left: 15%; color: #00581d; font-size: 70px; transform: rotate(-15deg); }
-            .tag15 { top: 30%; left: 55%; color: #4300ed; font-size: 100px; transform: rotate(4deg); }
+            @keyframes move {
+            0% {
+                top: 5%;
+                left: 5%;
+            }
+            25% {
+                top: 15%;
+                left: 35%;
+            }
+            50% {
+                top: 60%;
+                left: 60%;
+            }
+            75% {
+                top: 80%;
+                left: 15%;
+            }
+            100% {
+                top: 5%;
+                left: 70%;
+            }
+            }
+
+            .tag1  { top: 10%; left: 20%; color: #ff0000; font-size: 100px; transform: rotate(-10deg); animation-duration: 12s;}
+            .tag2  { top: 25%; left: 50%; color: #0091ff; font-size: 70px; transform: rotate(15deg); animation-duration: 22s;}
+            .tag3  { top: 40%; left: 30%; color: #00ff37; font-size: 100px; transform: rotate(-5deg); animation-duration: 10s;}
+            .tag4  { top: 15%; left: 70%; color: #ffff00; font-size: 70px; transform: rotate(8deg); animation-duration: 40s;}
+            .tag5  { top: 60%; left: 10%; color: #ff8800; font-size: 100px; transform: rotate(-12deg); animation-duration: 27s;}
+            .tag6  { top: 70%; left: 50%; color: #8c00ff; font-size: 70px; transform: rotate(50deg); animation-duration: 20s;}
+            .tag7  { top: 35%; left: 70%; color: #178800; font-size: 100px; transform: rotate(-60deg); animation-duration: 15s;}
+            .tag8  { top: 50%; left: 50%; color: #001941; font-size: 70px; transform: rotate(12deg); animation-duration: 7s;}
+            .tag9  { top: 65%; left: 25%; color: #8c4d00; font-size: 100px; transform: rotate(-8deg); animation-duration: 55s;}
+            .tag10 { top: 20%; left: 40%; color: #4b4e00; font-size: 70px; transform: rotate(10deg); animation-duration: 18s;}
+            .tag11 { top: 75%; left: 50%; color: #e000e0; font-size: 100px; transform: rotate(3deg); animation-duration: 16s;}
+            .tag12 { top: 5%; left: 45%; color: #390000; font-size: 70px; transform: rotate(-7deg); animation-duration: 24s;}
+            .tag13 { top: 75%; left: 30%; color: #00a7b7; font-size: 100px; transform: rotate(6deg); animation-duration: 28s;}
+            .tag14 { top: 45%; left: 15%; color: #00581d; font-size: 70px; transform: rotate(-15deg); animation-duration: 32s;}
+            .tag15 { top: 30%; left: 55%; color: #4300ed; font-size: 100px; transform: rotate(4deg); animation-duration: 30s;}
 
         </style>
     </head>
