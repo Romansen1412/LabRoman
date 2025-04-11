@@ -9,6 +9,17 @@
         <link rel="icon" href="favicon-16x16.png">
         <link rel="icon" href="favicon-32x32.png">
     </head>
+    <style>
+        .message {
+            cursor: pointer;
+            display: inline-block;
+            border: solid 2px;
+            background-color: antiquewhite;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 15px;
+        }
+    </style>
 
     <body>
         <header>
@@ -16,13 +27,21 @@
         </header>
 
         <main>
-            <ul>
-                <li><a href="arithmetic.html">Арифметика</a></li>
-            </ul>
+            <div class="message" onclick="five_plus_five()">Сумма 5154 и 7891</div>
+            <div class="message">Кто владелец сайта?</div>
         </main>
 
         <footer>
             &copy Роман Фисенко, ФБИ-31, 2 курс, 2025
         </footer>
+        
+        <script>
+            function five_plus_five() {
+                let a = 5154;
+                let b = 7891;
+                let result = a + b;
+                alert('Сумма '+ a +' и '+ a +' равна ' + result);
+            }
+        </script>
     </body>
 </html>
