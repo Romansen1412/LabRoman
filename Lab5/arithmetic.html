@@ -28,10 +28,10 @@
 
         <main>
             <div class="message" onclick="five_plus_five()">Сумма 5154 и 7891</div>
-            <div class="message">Кто владелец сайта?</div>
+            <div class="message" onclick="WhoIsWho()">Кто владелец сайта?</div>
         </main>
 
-        <footer>
+        <footer ondblclick="Hellow()" style="cursor: pointer;">
             &copy Роман Фисенко, ФБИ-31, 2 курс, 2025
         </footer>
         
@@ -40,7 +40,15 @@
                 let a = 5154;
                 let b = 7891;
                 let result = a + b;
-                alert('Сумма '+ a +' и '+ a +' равна ' + result);
+                alert('Сумма '+ a +' и '+ b +' равна ' + result);
+            }
+            function WhoIsWho() {
+                let author = 'Автор страницы:\nФисенко Роман Алексеевич'
+                alert(author)
+            }
+            function Hellow() {
+                let Hi = 'Приветствую вас на моей странице!'
+                alert(Hi)
             }
         </script>
     </body>
