@@ -19,6 +19,11 @@
             margin: 10px;
             border-radius: 15px;
         }
+        #output {
+            border: 1px solid;
+            width: 300px;
+            height: 40px;
+        }
     </style>
 
     <body>
@@ -35,6 +40,16 @@
             <div class="message" onclick="showDiv()">Найти отношение чисел</div>
             <div class="message" onclick="show_stepen()">Возвести в степень</div>
             <div class="message" onclick="WhoIsWho()">Кто владелец сайта?</div>
+            
+            <div>
+                <input type="button" value="Кнопка 1" onclick="changeOutput(1, 'red', 'yellow', '10px', '50px', '100px', '30px solid')">
+                <input type="button" value="Кнопка 2" onclick="changeOutput(2, 'black', 'lime', '50px', '300px', '150px', '5px solid')">
+                <input type="button" value="Кнопка 3" onclick="changeOutput(1, 'green', 'white', '0px', '200px', '130px', '10px solid')">
+                <input type="button" value="Кнопка 4" onclick="changeOutput(1, 'orange', 'black', '15px', '400px', '250px', '7px solid')">
+            </div>
+
+            <div id="output"></div>
+        
         </main>
 
         <footer ondblclick="Hellow()" style="cursor: pointer;">
@@ -158,6 +173,16 @@
             function Hellow() {
                 let Hi = 'Приветствую вас на моей странице!\nХорошего дня, не болейте'
                 alert(Hi)
+            }
+            function changeOutput(buttonNum, backColor, textColor, BorderR, heightT, widthH, border1) {
+                let output = document.getElementById('output');
+                output.innerHTML = 'Нажата кнопка ' + buttonNum;
+                output.style.backgroundColor = backColor;
+                output.style.color = textColor;
+                output.style.borderRadius = BorderR;
+                output.style.height = heightT;
+                output.style.width = widthH;
+                output.style.border = border1;
             }
         </script>
     </body>
