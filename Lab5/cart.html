@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Фисенко Роман Алексеевич. Лабораторная 5</title>
+        <link rel="stylesheet" href="..\main.css">
+        <link rel="shortcut icon" href="..\favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon-16x16.png">
+        <link rel="icon" href="favicon-32x32.png">
+    </head>
+    <style>
+        .container {
+            width: 250px;
+            margin: 100px auto;
+            border: 2px solid rgb(12, 123, 44);
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .cart {
+            text-align: center;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .What {
+            width: 220px;
+            margin-bottom: 15px;
+        }
+        #output {
+            margin: 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+
+
+    <body>
+        <header>
+            НГТУ, ФБ, Лабораторная работа 5
+        </header>
+
+        <main>
+            <div class="container">
+                <div class="cart">Корзина товаров</div>
+
+                <div>Пицца (600 р/шт)</div>
+                <label><input type="number" placeholder="Сколько пиццы хочешь?" id="A" class="What"></label><br>
+                <div>Роллы (30 р/шт)</div>
+                <label><input type="number" placeholder="Сколько роллов хочешь?" id="B" class="What"></label><br>
+                <div>Бургеры (120 р/шт)</div>
+                <label"><input type="number" placeholder="Сколько бургеров хочешь?" id="C" class="What"></label><br>
+                <div>Картошка фри (65 р/шт)</div>
+                <label><input type="number" placeholder="Сколько картошки хочешь?" id="D" class="What"></label><br>
+                <div>Лимонад (50 р/шт)</div>
+                <label><input type="number" placeholder="Сколько лимонадов хочешь?" id="E" class="What"></label><br>
+            
+
+                <div>
+                    <input type="button" value="Рассчитать" onclick="cost()">
+                </div>
+                
+                <div id="output"></div>
+
+                <div>
+                    <input type="button" value="Очистить" onclick="clearForm()">
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            &copy Роман Фисенко, ФБИ-31, 2 курс, 2025
+        </footer>
+        <script>
+            function cost() {
+                let inputA = document.getElementById('A')
+                let inputB = document.getElementById('B')
+                let inputC = document.getElementById('C')
+                let inputD = document.getElementById('D')
+                let inputE = document.getElementById('E')
+
+                let a = parseInt(inputA.value);
+                let b = parseInt(inputB.value);
+                let c = parseInt(inputC.value);
+                let d = parseInt(inputD.value);
+                let e = parseInt(inputE.value);
+
+                if(isNaN(a)) {
+                    alert('Введи число!');
+                    inputA.focus();
+                    inputA.select();
+                    inputA.style.color = 'red';
+                    inputA.style.borderColor = 'red';
+                    return;
+                }
+                if(a < 0) {
+                    alert('Нам должен будешь?')
+                    inputA.focus();
+                    inputA.select();
+                    inputA.style.color = 'red';
+                    inputA.style.borderColor = 'red';
+                    return;
+                }
+                if(isNaN(b)) {
+                    alert('Введи число!');
+                    inputB.focus();
+                    inputB.select();
+                    inputB.style.color = 'red';
+                    inputB.style.borderColor = 'red';
+                    return;
+                }
+                if(b < 0) {
+                    alert('Нам должен будешь?')
+                    inputB.focus();
+                    inputB.select();
+                    inputB.style.color = 'red';
+                    inputB.style.borderColor = 'red';
+                    return;
+                }
+                if(isNaN(c)) {
+                    alert('Введи число!');
+                    inputC.focus();
+                    inputC.select();
+                    inputC.style.color = 'red';
+                    inputC.style.borderColor = 'red';
+                    return;
+                }
+                if(c < 0) {
+                    alert('Нам должен будешь?')
+                    inputC.focus();
+                    inputC.select();
+                    inputC.style.color = 'red';
+                    inputC.style.borderColor = 'red';
+                    return;
+                }
+                if(isNaN(d)) {
+                    alert('Введи число!');
+                    inputD.focus();
+                    inputD.select();
+                    inputD.style.color = 'red';
+                    inputD.style.borderColor = 'red';
+                    return;
+                }
+                if(d < 0) {
+                    alert('Нам должен будешь?')
+                    inputD.focus();
+                    inputD.select();
+                    inputD.style.color = 'red';
+                    inputD.style.borderColor = 'red';
+                    return;
+                }
+                if(isNaN(e)) {
+                    alert('Введи число!');
+                    inputE.focus();
+                    inputE.select();
+                    inputE.style.color = 'red';
+                    inputE.style.borderColor = 'red';
+                    return;
+                }
+                if(e < 0) {
+                    alert('Нам должен будешь?')
+                    inputE.focus();
+                    inputE.select();
+                    inputE.style.color = 'red';
+                    inputE.style.borderColor = 'red';
+                    return;
+                }
+
+                inputA.style.color = '';
+                inputA.style.borderColor = '';
+                inputB.style.color = '';
+                inputB.style.borderColor = '';
+                inputC.style.color = '';
+                inputC.style.borderColor = '';
+                inputD.style.color = '';
+                inputD.style.borderColor = '';
+                inputE.style.color = '';
+                inputE.style.borderColor = '';
+
+                let result = a*600 + b*30 + c*120 + d*65 + e*50;
+                let output = document.getElementById('output');
+                output.innerHTML = 'Сумма хотелок = ' + result;
+            }
+            function clearForm() {
+                let inputA = document.getElementById('A');
+                let inputB = document.getElementById('B');
+                let inputC = document.getElementById('C');
+                let inputD = document.getElementById('D');
+                let inputE = document.getElementById('E');
+                let output = document.getElementById('output');
+
+                inputA.value = '';
+                inputB.value = '';
+                inputC.value = '';
+                inputD.value = '';
+                inputE.value = '';
+
+                inputA.style.color = '';
+                inputB.style.color = '';
+                inputC.style.color = '';
+                inputD.style.color = '';
+                inputE.style.color = '';
+
+                inputA.style.borderColor = '';
+                inputB.style.borderColor = '';
+                inputC.style.borderColor = '';
+                inputD.style.borderColor = '';
+                inputE.style.borderColor = '';
+
+                output.innerHTML = '';
+            }
+        </script>
+    </body>
+</html>
