@@ -30,8 +30,9 @@
             <label>Первое число: <input type="number" value="5154" id="NumA"></label><br>
             <label>Второе число: <input type="number" value="7891" id="NumB"></label><br>
             <div class="message" onclick="five_plus_five()">Найти сумму чисел</div>
-            <div class="message" onclick="five_del_five()">Найти разность чисел</div>
+            <div class="message" onclick="five_min_five()">Найти разность чисел</div>
             <div class="message" onclick="five_x_five()">Найти произведение чисел</div>
+            <div class="message" onclick="showDiv()">Найти отношение чисел</div>
             <div class="message" onclick="WhoIsWho()">Кто владелец сайта?</div>
         </main>
 
@@ -58,12 +59,53 @@
                 let result = a * b;
                 alert('Произведение '+ a +' и '+ b +' равна ' + result);
             }
-            function five_del_five() {
+            function five_min_five() {
                 let inputA = document.getElementById('NumA')
                 let inputB = document.getElementById('NumB')
 
                 let a = parseInt(inputA.value);
                 let b = parseInt(inputB.value);
+                let result = a - b;
+                alert('Разность '+ a +' и '+ b +' равна ' + result);
+            }
+            function showDiv() {
+                let inputA = document.getElementById('NumA')
+                let inputB = document.getElementById('NumB')
+
+                let a = parseInt(inputA.value);
+                let b = parseInt(inputB.value);
+                if(b == 0) {
+                    alert('На ноль не дели пж')
+                    inputB.focus();
+                    inputB.select();
+                    inputB.style.color = 'red';
+                    inputB.style.borderColor = 'red';
+                    return;
+                }
+
+                if(isNaN(a)) {
+                    alert('Введи хоть что-то пж в первое поле')
+                    inputA.focus();
+                    inputA.select();
+                    inputA.style.color = 'red';
+                    inputA.style.borderColor = 'red';
+                    return;
+                }
+
+                if(isNaN(b)) {
+                    alert('Введи хоть что-то пж во второе поле')
+                    inputB.focus();
+                    inputB.select();
+                    inputB.style.color = 'red';
+                    inputB.style.borderColor = 'red';
+                    return;
+                }
+
+                inputA.style.color = '';
+                inputA.style.borderColor = '';
+                inputB.style.color = '';
+                inputB.style.borderColor = '';
+
                 let result = a / b;
                 alert('Разность '+ a +' и '+ b +' равна ' + result);
             }
