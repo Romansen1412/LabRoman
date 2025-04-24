@@ -22,12 +22,14 @@
     </style>
 
     <body>
-        <header>
+        <header onclick="WhoIsWho()" style="cursor: pointer;">
             НГТУ, ФБ, Лабораторная работа 5
         </header>
 
         <main>
-            <div class="message" onclick="five_plus_five()">Сумма 5154 и 7891</div>
+            <label>Первое число: <input type="number" value="5154" id="NumA"></label><br>
+            <label>Второе число: <input type="number" value="7891" id="NumB"></label><br>
+            <div class="message" onclick="five_plus_five()">Найти сумму чисел</div>
             <div class="message" onclick="WhoIsWho()">Кто владелец сайта?</div>
         </main>
 
@@ -37,8 +39,11 @@
         
         <script>
             function five_plus_five() {
-                let a = 5154;
-                let b = 7891;
+                let inputA = document.getElementById('NumA')
+                let inputB = document.getElementById('NumB')
+
+                let a = parseInt(inputA.value);
+                let b = parseInt(inputB.value);
                 let result = a + b;
                 alert('Сумма '+ a +' и '+ b +' равна ' + result);
             }
@@ -47,7 +52,7 @@
                 alert(author)
             }
             function Hellow() {
-                let Hi = 'Приветствую вас на моей странице!'
+                let Hi = 'Приветствую вас на моей странице!\nХорошего дня, не болейте'
                 alert(Hi)
             }
         </script>
