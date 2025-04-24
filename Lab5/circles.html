@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Фисенко Роман Алексеевич. Лабораторная 5</title>
+        <link rel="stylesheet" href="..\main.css">
+        <link rel="shortcut icon" href="..\favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon-16x16.png">
+        <link rel="icon" href="favicon-32x32.png">
+    </head>
+    <style>
+        .circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            position: absolute;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            text-align: center;
+            line-height: 80px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+        #resetButton {
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background-color: green;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+
+    <body>
+        <header>
+            НГТУ, ФБ, Лабораторная работа 5
+        </header>
+
+        <main>
+            <div id="circle1" class="circle" onclick="hideCircle('circle1')" style="left: 550px; top: 280px; background-color: red;">1</div>
+            <div id="circle2" class="circle" onclick="hideCircle('circle2')" style="left: 700px; top: 280px; background-color: orange;">2</div>
+            <div id="circle3" class="circle" onclick="hideCircle('circle3')" style="left: 620px; top: 400px; background-color: yellow; color: black;">3</div>
+            <div id="circle4" class="circle" onclick="hideCircle('circle4')" style="left: 480px; top: 380px; background-color: green;">4</div>
+            <div id="circle5" class="circle" onclick="hideCircle('circle5')" style="left: 770px; top: 370px; background-color: blue;">5</div>
+            <div id="circle6" class="circle" onclick="hideCircle('circle6')" style="left: 660px; top: 500px; background-color: indigo;">6</div>
+            <div id="circle7" class="circle" onclick="hideCircle('circle7')" style="left: 500px; top: 520px; background-color: violet;">7</div>
+            <div id="circle8" class="circle" onclick="hideCircle('circle8')" style="left: 780px; top: 520px; background-color: pink; color: black;">8</div>
+            <div id="circle9" class="circle" onclick="hideCircle('circle9')" style="left: 850px; top: 430px; background-color: turquoise; color: black;">9</div>
+            <div id="circle10" class="circle" onclick="hideCircle('circle10')" style="left: 430px; top: 460px; background-color: brown;">10</div>
+        
+
+            <button id="resetButton" onclick="resetCircles()">Восстановить круги</button>
+        </main>
+
+        <footer>
+            &copy Роман Фисенко, ФБИ-31, 2 курс, 2025
+        </footer>
+        <script>
+            function hideCircle(id) {
+            let circle = document.getElementById(id);
+            circle.style.opacity = '0';
+            circle.style.width = '0px';
+            circle.style.height = '0px';
+            circle.style.lineHeight = '0px';
+            circle.style.fontSize = '0px';
+        }
+
+        function resetCircles() {
+            restoreCircle('circle1');
+            restoreCircle('circle2');
+            restoreCircle('circle3');
+            restoreCircle('circle4');
+            restoreCircle('circle5');
+            restoreCircle('circle6');
+            restoreCircle('circle7');
+            restoreCircle('circle8');
+            restoreCircle('circle9');
+            restoreCircle('circle10');
+        }
+
+        function restoreCircle(id) {
+            let circle = document.getElementById(id);
+            circle.style.opacity = '1';
+            circle.style.width = '80px';
+            circle.style.height = '80px';
+            circle.style.lineHeight = '80px';
+            circle.style.fontSize = '24px';
+        }
+        </script>
+    </body>
+</html>
