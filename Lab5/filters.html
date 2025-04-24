@@ -44,6 +44,12 @@
             </div>
             <div><img src="reka_derevia_krasnyj.jpg" id="grayscaleImage" width="60%"></div>
         
+            <div>
+                Оттенки цвета:
+                <input type="range" min="0" max="360" value="0" onchange="hueChange()" id="hueValue">
+                <span id="hueOutput"></span>
+            </div>
+            <div><img src="reka_derevia_krasnyj.jpg" id="hueImage" width="60%"></div>
         </main>
 
         <footer>
@@ -69,6 +75,11 @@
                 let value = document.getElementById('grayscaleValue').value + '%'
                 document.getElementById('grayscaleOutput').innerText = value
                 document.getElementById('grayscaleImage').style.filter = 'grayscale(' + value + ')'
+            }
+            function hueChange() {
+                let value = document.getElementById('hueValue').value + 'deg'
+                document.getElementById('hueOutput').innerText = value
+                document.getElementById('hueImage').style.filter = 'hue-rotate(' + value + ')'
             }
         </script>
     </body>
