@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Фисенко Роман Алексеевич. Лабораторная 5</title>
+        <link rel="stylesheet" href="..\main.css">
+        <link rel="shortcut icon" href="..\favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon-16x16.png">
+        <link rel="icon" href="favicon-32x32.png">
+    </head>
+
+    <body>
+        <header>
+            НГТУ, ФБ, Лабораторная работа 5
+        </header>
+
+        <main>
+            <div>
+                Наведите мышь на изображение. Чем правее курсор — тем сильнее эффект<br><br>
+            </div>
+            <div>
+                Зажмите <b>Ctrl</b> для grayscale, <b>Alt</b> для hue-rotate, <b>Shift</b> для invert
+            </div>
+    
+            <div>
+                <img src="reka_derevia_krasnyj.jpg" id="Image" width="60%" onmousemove="changeFilter()">
+            </div>
+    
+            <div id="filterInfo"></div>
+        </main>
+
+        <footer>
+            &copy Роман Фисенко, ФБИ-31, 2 курс, 2025
+        </footer>
+        <script>
+            function changeFilter() {
+                let image = document.getElementById('Image');
+                let info = document.getElementById('filterInfo');
+    
+                let x = event.offsetX;
+                let width = image.clientWidth;
+                let percent = x / width;
+    
+                let filterName = 'blur';
+                let value = Math.round(percent * 20);
+                let unit = 'px';
+    
+                if (event.ctrlKey) {
+                    filterName = 'grayscale';
+                    value = Math.round(percent * 100);
+                    unit = '%';
+                } else if (event.altKey) {
+                    filterName = 'hue-rotate';
+                    value = Math.round(percent * 360);
+                    unit = 'deg';
+                } else if (event.shiftKey) {
+                    filterName = 'invert';
+                    value = Math.round(percent * 100);
+                    unit = '%';
+                }
+    
+                image.style.filter = filterName + '(' + value + unit + ')';
+                info.innerHTML = 'Фильтр: ' + filterName + '(' + value + unit + ')';
+            }
+        </script>
+    </body>
+</html>
