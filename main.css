@@ -8,6 +8,7 @@ main {
     color:  darkgreen;
     font-family: Arial;
     margin: 10px 20px 38.4px;
+    padding-top: 40px;
 }
 footer {
     background-color: black;
@@ -28,8 +29,8 @@ header {
     margin: 0px;
     padding: 10px;
     text-align: left;
-    position: sticky;
-    bottom: 0;
+    position: fixed;
+    top: 0;
     right: 0;
     left: 0;
 }
