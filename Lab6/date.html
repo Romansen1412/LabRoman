@@ -18,6 +18,10 @@
             border-radius: 10px;
             box-shadow: 0 2px 5px black;
         }
+
+        header {
+            transition: color 0.5s;
+        }
     </style>
 
     <body onload="showDate()">
@@ -27,6 +31,10 @@
 
         <main>
             <div id="current-date"></div>
+            <div>
+                <button onclick="startChangeColors()" id="start-btn">Старт</button>
+                <button onclick="stopChangeColors()" disabled id="stop-btn">Стоп</button>
+            </div>
         </main>
 
         <footer>
@@ -44,6 +52,26 @@
                     <div>Дата и время для локали Греции: ${today.toLocaleString('el')}</div>
                     <div>Дата и время для локали Китая: ${today.toLocaleString('zh')}</div>
                 `;
+        }
+
+        function changeColors() {
+            const header = document.getElementsByTagName('header')[0]
+            const rgb = `rgb(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255})`;
+            header.style.color = rgb;
+        }
+
+        let timerNum;
+
+        function startChangeColors() {
+            timerNum = setInterval(changeColors, 1000);
+            document.getElementById('start-btn').disabled = true;
+            document.getElementById('stop-btn').disabled = false;
+        }
+
+        function stopChangeColors() {
+            clearInterval(timerNum);
+            document.getElementById('start-btn').disabled = false;
+            document.getElementById('stop-btn').disabled = true;
         }
     </script>
 </html>
