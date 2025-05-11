@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Фисенко Роман Алексеевич. Лабораторная 5</title>
+        <link rel="stylesheet" href="..\main.css">
+        <link rel="shortcut icon" href="..\favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon-16x16.png">
+        <link rel="icon" href="favicon-32x32.png">
+    </head>
+    <style>
+        #diag {
+            display: flex;
+            align-items: flex-end;
+            background-color: white;
+            height: 500px
+        }
+
+        .bar {
+            margin: 3px;
+            width: 50px;
+            background-color: seagreen;
+            color: darkred;
+            text-align: center;
+        }
+
+        .min {
+            background-color: lightblue;
+            width: 100%;
+        }
+
+        .range {
+            background-color: orange;
+            width: 100%;
+        }
+
+        .selected .min {
+            background-color: blue;
+        }
+
+        .selected .range {
+            background-color: red;
+        }
+
+        #info {
+            margin-top: 10px;
+        }
+    </style>
+
+    <body onload="showDiagram()">
+        <header>
+            НГТУ, ФБ, Лабораторная работа 5
+        </header>
+
+        <main>
+            <div id="diag">
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+                <div class="bar"><div class="min"></div><div class="range"></div></div>
+            </div>
+
+            <div style="margin-top: 15px;">
+                <label for="day-input">Введите номер дня (1-30): </label>
+                <input type="number" id="day-input" min="1" max="30">
+            </div>
+    
+            <div id="info"></div>
+        </main>
+
+        <footer>
+            &copy Роман Фисенко, ФБИ-31, 2 курс, 2025
+        </footer>
+    </body>
+    <script>
+        let temperatures = [];
+        let selectedBar = null;
+
+        function showDiagram() {
+            const bars = document.getElementsByClassName('bar');
+
+            for (let i = 0; i < 30; i++) {
+                let min = Math.floor(Math.random() * 15) + 5; //от 5 до 19
+                let max = min + Math.floor(Math.random() * 10) + 1; //от min+1 до min+10
+
+                temperatures.push({ min, max }); //Добавление в массив
+
+                const minDiv = bars[i].getElementsByClassName('min')[0];
+                const rangeDiv = bars[i].getElementsByClassName('range')[0];
+
+                minDiv.style.height = min * 15 + 'px';
+                rangeDiv.style.height = (max - min) * 15 + 'px';
+
+                minDiv.textContent = `${min}°`;
+                rangeDiv.textContent = `${max}°`;
+
+            }
+
+            function handleDayInput() {
+                const day = this.value;
+
+                if (selectedBar) {
+                    selectedBar.classList.remove('selected');
+                }
+
+                if (day >= 1 && day <= 30) {
+                    const index = day - 1;
+                    const bar = bars[index];
+                    bar.classList.add('selected');
+                    selectedBar = bar;
+
+                    const temp = temperatures[index];
+                    document.getElementById('info').textContent = `День ${day}: Мин = ${temp.min}°C, Макс = ${temp.max}°C`;
+                }
+                
+                else {
+                    document.getElementById('info').textContent = '';
+                }
+            }
+
+            document.getElementById('day-input').addEventListener('input', handleDayInput);
+        }
+    </script>
+</html>
