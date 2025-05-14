@@ -16,13 +16,25 @@
         </header>
 
         <main>
-            <ul>
-                <li><a href="bloks.html">Добавление блоков</a></li>
-            </ul>
+            <button onclick="addNewBlock()">Добавить блок</button>
         </main>
 
         <footer>
             &copy Роман Фисенко, ФБИ-31, 2 курс, 2025
         </footer>
     </body>
+    <script>
+        function addNewBlock() {
+            let newBlock = document.createElement('div');
+            newBlock.style.background = 'linear-gradient(to right top, red, orange, gold, green, lightblue, blue)';
+            newBlock.style.height = '40px';
+            newBlock.style.width = '50%';
+            newBlock.style.border = '4px solid';
+            newBlock.style.borderRadius = '10px';
+            newBlock.style.margin = '15px';
+            newBlock.style.boxShadow = '4px 4px 4px black';
+
+            document.querySelector('main').appendChild(newBlock);
+        }
+    </script>
 </html>
