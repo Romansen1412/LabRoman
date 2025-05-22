@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Фисенко Роман Алексеевич. Лабораторная 7</title>
+    <link rel="stylesheet" href="..\main.css">
+    <link rel="shortcut icon" href="..\favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon-16x16.png">
+    <link rel="icon" href="favicon-32x32.png">
+</head>
+
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <button onclick="showStocks()" id="stocks-button">Курс акций МТС</button>
+        <table border="1" id="stocks-table"></table>
+        <div id="stocks-detail"></div>
+    </main>
+
+    <footer>
+        &copy; Роман Фисенко, ФБИ-31, 2 курс, 2025
+    </footer>
+    <script src="MTSS.js"></script>
+    <script>
+        function showStocks() {
+            let table = document.getElementById('stocks-table');
+            let detail = document.getElementById('stocks-detail');
+            let button = document.getElementById('stocks-button');
+
+            let header = document.createElement('tr');
+            ['Дата', 'Цена акций', 'Разница'].forEach(text => {
+                let th = document.createElement('th');
+                th.innerText = text;
+                header.appendChild(th);
+            });
+            table.appendChild(header);
+
+            let sum = 0;
+            let max = stockExchange[0];
+            let min = stockExchange[0];
+
+            for (let i = 0; i < stockExchange.length; i++) {
+                let tr = document.createElement('tr');
+
+                let tdDate = document.createElement('td');
+                tdDate.innerText = dates[i];
+                tr.appendChild(tdDate);
+
+                let tdPrice = document.createElement('td');
+                tdPrice.innerText = stockExchange[i].toFixed(2);
+                tr.appendChild(tdPrice);
+
+                let tdDiff = document.createElement('td');
+                if (i === 0) {
+                    tdDiff.innerText = '—';
+                } else {
+                    let diff = (stockExchange[i] - stockExchange[i - 1]).toFixed(2);
+                    tdDiff.innerText = diff;
+                    if (diff > 0) {
+                        tdDiff.style.color = 'green';
+                    } else if (diff < 0) {
+                        tdDiff.style.color = 'red';
+                    }
+                }
+                tr.appendChild(tdDiff);
+                table.appendChild(tr);
+
+                sum += stockExchange[i];
+                if (stockExchange[i] > max) max = stockExchange[i];
+                if (stockExchange[i] < min) min = stockExchange[i];
+            }
+
+            let average = (sum / stockExchange.length).toFixed(2);
+            detail.innerHTML = `
+                <p>Средняя стоимость акций: <strong>${average}</strong></p>
+                <p>Максимальная стоимость: <strong>${max.toFixed(2)}</strong></p>
+                <p>Минимальная стоимость: <strong>${min.toFixed(2)}</strong></p>
+            `;
+
+            button.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
