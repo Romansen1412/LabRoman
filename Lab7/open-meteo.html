@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Фисенко Роман Алексеевич. Лабораторная 7</title>
+        <link rel="stylesheet" href="..\main.css" />
+        <link rel="shortcut icon" href="..\favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="favicon-16x16.png" />
+        <link rel="icon" href="favicon-32x32.png" />
+        <style>
+            #weather {
+                border: 3px solid black;
+                padding: 20px;
+                margin-top: 25px;
+                background-color: aliceblue;
+                border-radius: 8px;
+                color: black;
+            }
+            .bar-container {
+                display: flex;
+                gap: 10px;
+                justify-content: center;
+                margin-top: 20px;
+                align-items: flex-end;
+            }
+            .bar-block {
+                text-align: center;
+                width: 40px;
+                font-size: 12px;
+            }
+            .temp-bar {
+                background-color: steelblue;
+                margin-bottom: 3px;
+                border-radius: 4px;
+                color: white;
+                font-size: 10px;
+            }
+            .humidity-bar {
+                background-color: teal;
+                margin-bottom: 3px;
+                border-radius: 4px;
+                color: white;
+                font-size: 10px;
+            }
+            .label {
+                margin-top: 4px;
+            }
+            h3 {
+                margin-top: 30px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>НГТУ, ФБ, Лабораторная работа 7</header>
+
+        <main>
+            <button id="load-weather-btn">Показать погоду</button>
+            <div id="weather">Нажмите на кнопку</div>
+        </main>
+
+        <footer>&copy; Роман Фисенко, ФБИ-31, 2 курс, 2025</footer>
+
+        <script>
+            const url = "https://api.open-meteo.com/v1/forecast?latitude=55.0415&longitude=82.9346&hourly=temperature_2m,relative_humidity_2m&current_weather=true&timezone=Asia%2FNovosibirsk";
+
+            document.getElementById('load-weather-btn').addEventListener('click', function () {
+                fetch(url)
+                    .then(res => res.json())
+                    .then(data => {
+                        const times = data.hourly.time.slice(0, 24);
+                        const temps = data.hourly.temperature_2m.slice(0, 24);
+                        const humidity = data.hourly.relative_humidity_2m.slice(0, 24);
+
+                        let result = `
+                            <p><strong>Текущая температура:</strong> ${data.current_weather.temperature} °C</p>
+                            <p><strong>Текущая влажность:</strong> ${humidity[0]}%</p>
+
+                            <h3>Температура за 24 часа</h3>
+                            <div class="bar-container">
+                        `;
+
+                        for (let i = 0; i < 24; i++) {
+                            const timeStr = times[i].replace('T', '<br>');
+                            const temp = temps[i];
+                            result += `
+                                <div class="bar-block">
+                                    <div class="temp-bar" style="height: ${temp * 3}px" title="${temp}°C">${temp}°</div>
+                                    <div class="label">${timeStr}</div>
+                                </div>
+                            `;
+                        }
+
+                        result += `</div><h3>Влажность за 24 часа</h3><div class="bar-container">`;
+
+                        for (let i = 0; i < 24; i++) {
+                            const timeStr = times[i].replace('T', '<br>');
+                            const hum = humidity[i];
+                            result += `
+                                <div class="bar-block">
+                                    <div class="humidity-bar" style="height: ${hum * 1.5}px" title="${hum}%">${hum}%</div>
+                                    <div class="label">${timeStr}</div>
+                                </div>
+                            `;
+                        }
+
+                        result += `</div>`;
+
+                        document.getElementById('weather').innerHTML = result;
+                        document.getElementById('load-weather-btn').style.display = 'none';
+                    });
+            });
+        </script>
+    </body>
+</html>
