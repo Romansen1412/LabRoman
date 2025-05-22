@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Фисенко Роман Алексеевич. Лабораторная 7</title>
+        <link rel="stylesheet" href="..\main.css" />
+        <link rel="shortcut icon" href="..\favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="favicon-16x16.png" />
+        <link rel="icon" href="favicon-32x32.png" />
+        <style>
+            #weather {
+                width: 500px;
+                border: 3px solid black;
+                padding: 20px;
+                margin-top: 25px;
+                background-color: aliceblue;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                border-radius: 8px;
+                text-align: center;
+                color: black;
+                margin-bottom: 10px;
+            }
+            .link1 {
+                background: white;
+                padding: 3px 6px;
+                border-radius: 4px;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            НГТУ, ФБ, Лабораторная работа 7
+        </header>
+
+        <main>
+            <button id="load-weather-btn">Показать погоду</button>
+            <div id="weather">Нажмите на кнопку</div>
+        </main>
+
+        <footer>
+            &copy; Роман Фисенко, ФБИ-31, 2 курс, 2025
+        </footer>
+
+        <script>
+            const url = "https://api.open-meteo.com/v1/forecast?latitude=55.0415&longitude=82.9346&hourly=temperature_2m&timezone=Asia%2FNovosibirsk";
+
+            document.getElementById('load-weather-btn').addEventListener('click', function () {
+                const button = this;
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => {
+                        const times = data.hourly.time;
+                        const temps = data.hourly.temperature_2m;
+
+                        const now = new Date();
+                        const yyyy = now.getFullYear();
+                        const mm = String(now.getMonth() + 1).padStart(2, '0');
+                        const dd = String(now.getDate()).padStart(2, '0');
+                        const today = `${yyyy}-${mm}-${dd}`;
+
+                        const timesToCheck = [
+                            `${today}T08:00`,
+                            `${today}T12:00`,
+                            `${today}T20:00`
+                        ];
+
+                        let output = `<p><strong>Температура в Новосибирске сегодня:</strong></p>`;
+
+                        timesToCheck.forEach(time => {
+                            const index = times.indexOf(time);
+                            output += `<p>${time.slice(11, 16)} — ${temps[index]} °C</p>`;
+                        });
+
+                        document.getElementById('weather').innerHTML = output;
+                        button.style.display = 'none';
+                    })
+            });
+        </script>
+    </body>
+</html>
