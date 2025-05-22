@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Фисенко Роман Алексеевич. Лабораторная 7</title>
+    <link rel="stylesheet" href="..\main.css" />
+    <link rel="shortcut icon" href="..\favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="favicon-16x16.png" />
+    <link rel="icon" href="favicon-32x32.png" />
+    <style>
+        #exchange-result {
+            width: 500px;
+            border: 3px solid black;
+            padding: 20px;
+            margin-top: 25px;
+            background-color: lemonchiffon;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            text-align: center;
+            color: black;
+            margin-bottom: 10px;
+        }
+        .up {
+            color: green;
+            font-weight: bold;
+        }
+        .down {
+            color: red;
+            font-weight: bold;
+        }
+        .link1 {
+            background: white;
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        НГТУ, ФБ, Лабораторная работа 7
+    </header>
+
+    <main>
+        <button id="load-rate-btn">Показать курс евро</button>
+        <div id="exchange-result">Нажмите на кнопку</div>
+        <a href="https://www.cbr-xml-daily.ru/" class="link1">Курсы валют, API</a>
+    </main>
+
+    <footer>
+        &copy; Роман Фисенко, ФБИ-31, 2 курс, 2025
+    </footer>
+
+    <script>
+        const url = 'https://www.cbr-xml-daily.ru/daily_json.js';
+        
+        document.getElementById('load-rate-btn').addEventListener('click', function() {
+            const button = this;
+            fetch(url)
+                .then(response => response.json())
+                .then(json => {
+                    const euro = json.Valute.EUR;
+                    const currentRate = euro.Value;
+                    const previousRate = euro.Previous;
+                    const dateStr = new Date(json.Date).toLocaleString('ru-RU');
+
+                    let diff = currentRate - previousRate;
+                    let diffFixed = diff.toFixed(4);
+                    let diffClass = '';
+                    let diffText = '';
+
+                    if (diff > 0) {
+                        diffClass = 'up';
+                        diffText = 'Курс вырос';
+                    } else if (diff < 0) {
+                        diffClass = 'down';
+                        diffText = 'Курс снизился';
+                    } else {
+                        diffText = 'Курс не изменился';
+                    }
+
+                    document.getElementById('exchange-result').innerHTML = `
+                        <p><strong>Текущий курс евро:</strong> ${currentRate.toFixed(4)} ₽</p>
+                        <p><strong>Дата запроса:</strong> ${dateStr}</p>
+                        <p><strong>Курс предыдущего дня:</strong> ${previousRate.toFixed(4)} ₽</p>
+                        <p class="${diffClass}"><strong>Разница:</strong> ${diffFixed} ₽ — ${diffText}</p>
+                    `;
+                    button.style.display = 'none';
+                })
+        });
+    </script>
+</body>
+</html>
