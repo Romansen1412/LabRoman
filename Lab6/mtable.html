@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Фисенко Роман Алексеевич. Лабораторная 6</title>
+        <link rel="stylesheet" href="..\main.css">
+        <link rel="shortcut icon" href="..\favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon-16x16.png">
+        <link rel="icon" href="favicon-32x32.png">
+    </head>
+    <style>
+        .What {
+            width: 220px;
+            margin-bottom: 15px;
+        }
+    </style>
+
+    <body onload="showMutipleTable()">
+        <header>
+            НГТУ, ФБ, Лабораторная работа 6
+        </header>
+
+        <main>
+            <div id="mtable"></div>
+            <br>
+            <div>Умножить на:</div>
+            <label><input type="number" id="A" class="What"></label><br>
+            <div>Начать с:</div>
+            <label><input type="number" id="B" class="What"></label><br>
+            <div>Закончить на:</div>
+            <label"><input type="number" id="C" class="What"></label><br>
+        
+            <div>
+                <input type="button" value="Рассчитать" onclick="table()">
+            </div>
+        </main>
+
+        <footer>
+            &copy Роман Фисенко, ФБИ-31, 2 курс, 2025
+        </footer>
+        <script>
+            function table() {
+                let inputA = document.getElementById('A')
+                let inputB = document.getElementById('B')
+                let inputC = document.getElementById('C')
+
+                let a = parseInt(inputA.value);
+                let b = parseInt(inputB.value);
+                let c = parseInt(inputC.value);
+
+                if(isNaN(a)) {
+                    alert('Введи число!');
+                    inputA.focus();
+                    inputA.select();
+                    inputA.style.color = 'red';
+                    inputA.style.borderColor = 'red';
+                    return;
+                }
+                if(isNaN(b)) {
+                    alert('Введи число!');
+                    inputB.focus();
+                    inputB.select();
+                    inputB.style.color = 'red';
+                    inputB.style.borderColor = 'red';
+                    return;
+                }
+                if(isNaN(c)) {
+                    alert('Введи число!');
+                    inputC.focus();
+                    inputC.select();
+                    inputC.style.color = 'red';
+                    inputC.style.borderColor = 'red';
+                    return;
+                }
+                if(c < b) {
+                    alert('Нельзя начать с большего!');
+                    inputB.focus();
+                    inputB.select();
+                    inputB.style.color = 'red';
+                    inputB.style.borderColor = 'red';
+                    inputC.focus();
+                    inputC.select();
+                    inputC.style.color = 'red';
+                    inputC.style.borderColor = 'red';
+                    return;
+                }
+
+                inputA.style.color = '';
+                inputA.style.borderColor = '';
+                inputB.style.color = '';
+                inputB.style.borderColor = '';
+                inputC.style.color = '';
+                inputC.style.borderColor = '';
+
+                showMutipleTable(a, b, c)
+            }
+            function showMutipleTable(a, b, c) {
+                let tbl = document.getElementById('mtable')
+                tbl.innerHTML = '<h1>Таблица умножения</h1>'
+                for(i = b; i <= c; i++) {
+                    let s = `<div>${i} * ${a} = ${i*a}</div>`;
+                    tbl.innerHTML +=s;
+                }
+            }
+        </script>
+    </body>
+</html>

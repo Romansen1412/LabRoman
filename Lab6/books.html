@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Фисенко Роман Алексеевич. Лабораторная 6</title>
+        <link rel="stylesheet" href="..\main.css">
+        <link rel="shortcut icon" href="..\favicon.ico" type="image/x-icon">
+        <link rel="icon" href="favicon-16x16.png">
+        <link rel="icon" href="favicon-32x32.png">
+    </head>
+    <style>
+        #booklist div {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            background-color: white;
+        }
+
+        .bestseller sup {
+            background-color: yellow;
+            color: red;
+            font-style: italic;
+            border-radius: 5px;
+            padding: 2px 5px;
+            margin-left: 5px;
+        }
+
+        .unavailable {
+            color: gray;
+            opacity: 0.6;
+        }
+
+        .price {
+            color: green;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+    </style>
+
+    <body onload="showBooks()">
+        <header>
+            НГТУ, ФБ, Лабораторная работа 6
+        </header>
+
+        <main>
+            <h1>Список книг</h1>
+            <div id="booklist">
+
+            </div>
+        </main>
+
+        <footer>
+            &copy Роман Фисенко, ФБИ-31, 2 курс, 2025
+        </footer>
+    </body>
+    <script src="books.js"></script>
+    <script>
+        function showBooks() {
+            const booklist = document.getElementById('booklist');
+            for (let i = 0; i < books.length; i++) {
+                const book = books[i];
+                const bestsellerTag = book.bestseller
+                    ? '<sup>Лидер Продаж!</sup>'
+                    : '';
+                const availabilityClass = book.available
+                    ? ''
+                    : 'unavailable';
+                const availabilityNote = book.available
+                    ? ''
+                    : ' <span>(нет в наличии)</span>';
+    
+                booklist.innerHTML += `
+                    <div class="${book.bestseller ? 'bestseller' : ''} ${availabilityClass}">
+                        <b>${book.author}.</b>
+                        <i>${book.name}.</i>
+                        &mdash; ${book.publicationYear}
+                        <span class="price">${book.price} руб.</span>
+                        ${bestsellerTag}
+                        ${availabilityNote}
+                    </div>
+                `;
+            }
+        }
+    </script>    
+</html>
