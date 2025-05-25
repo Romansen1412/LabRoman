@@ -31,22 +31,26 @@
                 <div>Телефон: {{user.tel}}</div>
                 <hr>
 
-                <h2>Цветы</h2>
-                <ul class="list-group">
-                    <li v-for="(flower, id) in flowers" class="list-group-item">
-                        {{flower}} <button @click="edit(id, flower)">?</button>
-                    </li>
-                </ul>
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h2 class="card-title">Цветы</h2>
+                        <ul class="list-group">
+                            <li v-for="(flower, id) in flowers" class="list-group-item">
+                                {{flower}} <button @click="edit(id, flower)">?</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
                 <hr>
 
                 <h2>Цветы</h2>
                 <table class="table table-info">
-                    <thread>
+                    <thead>
                         <tr>
                             <th>Название</th>
                             <th>Редактировать</th>
                         </tr>
-                    </thread>
+                    </thead>
                     <tr v-for="(flower, id) in flowers">
                         <td>
                             {{flower}}
