@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Курс валют — калькулятор и график CHF</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="main-header">
+    <nav class="nav-menu">
+      <img class="logo" src="https://www.renins.ru/local/templates/renins/assets/common/img/mainLogo.svg" />
+      <a href="info.html" class="menu-link">О компании</a>
+      <a href="news.html" class="menu-link">Новости</a>
+      <a href="calc.html" class="menu-link active">Калькулятор Франков</a>
+      <a href="mission.html" class="menu-link">4</a>
+      <a href="contacts.html" class="menu-link">5</a>
+    </nav>
+  </header>
+
+  <main>
+
+    <div class="first">
+        <h1><em>Ренессанс Страхование (RENI)</em></h1>
+        <p><strong>Калькулятор валют — швейцарский франк (CHF)</strong></p>
+    </div>
+
+    <div class="calculator">
+      <label for="rubInput">Рубли (RUB):</label>
+      <input type="number" id="rubInput" min="0" step="0.01" placeholder="Введите сумму в рублях" />
+
+      <label for="chfInput">Франки (CHF):</label>
+      <input type="number" id="chfInput" min="0" step="0.0001" placeholder="Введите сумму в франках" />
+
+      <div id="todayRate"></div>
+    </div>
+
+    <div id="info">Кликните по столбцу на графике, чтобы увидеть дату и курс</div>
+
+    <canvas id="exchangeChart" style="max-width: 700px; max-height: 300px;"></canvas>
+  </main>
+
+  <footer>
+    <div class="footer">
+      Источник курса: <a href="https://www.cbr-xml-daily.ru/" target="_blank" rel="noopener">ЦБ РФ</a>
+    </div>
+  </footer>
+
+  <a href="#top" class="to-top">↑</a>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+        const API_URL = 'https://www.cbr-xml-daily.ru/daily_json.js';
+        const CURRENCY_CODE = 'CHF';
+
+        let chart = null;
+        let historyRates = [];
+        let todayRate = null;
+
+        async function fetchTodayRate() {
+            const res = await fetch(API_URL);
+            const data = await res.json();
+            return data.Valute[CURRENCY_CODE].Value;
+        }
+
+        async function fetchHistoryRates(days = 31) {
+        const history = [];
+        const today = new Date();
+
+        for(let i = days - 1; i >= 0; i--) {
+            const d = new Date(today);
+            d.setDate(d.getDate() - i);
+
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+
+            const url = `https://www.cbr-xml-daily.ru/archive/${yyyy}/${mm}/${dd}/daily_json.js`;
+
+            try {
+            const res = await fetch(url);
+            if(!res.ok) continue;
+            const data = await res.json();
+            if(data.Valute && data.Valute[CURRENCY_CODE]) {
+                history.push({date: `${dd}.${mm}`, rate: data.Valute[CURRENCY_CODE].Value});
+            }
+            } catch(e) {
+            continue;
+            }
+        }
+        return history;
+        }
+
+        function setupCalculator(rate) {
+        todayRate = rate;
+        document.getElementById('todayRate').textContent = `Сегодняшний курс: 1 CHF = ${todayRate.toFixed(4)} RUB`;
+
+        const rubInput = document.getElementById('rubInput');
+        const chfInput = document.getElementById('chfInput');
+
+        function fromRub() {
+            const rub = parseFloat(rubInput.value);
+            if(isNaN(rub)) {
+            chfInput.value = '';
+            return;
+            }
+            chfInput.value = (rub / todayRate).toFixed(4);
+        }
+
+        function fromChf() {
+            const chf = parseFloat(chfInput.value);
+            if(isNaN(chf)) {
+            rubInput.value = '';
+            return;
+            }
+            rubInput.value = (chf * todayRate).toFixed(2);
+        }
+
+        rubInput.addEventListener('input', fromRub);
+        chfInput.addEventListener('input', fromChf);
+        }
+
+        function renderChart(history) {
+        const ctx = document.getElementById('exchangeChart').getContext('2d');
+        const labels = history.map(item => item.date);
+        const data = history.map(item => item.rate);
+
+        if(chart) chart.destroy();
+
+        chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+            labels,
+            datasets: [{
+                label: 'Курс CHF к RUB',
+                data,
+                backgroundColor: data.map(() => '#306'),
+                borderColor: 'black',
+                borderWidth: 1
+            }]
+            },
+            options: {
+                animation: false,
+                plugins: { tooltip: { enabled: false } },
+                interaction: {
+                mode: 'nearest',
+                axis: 'x',
+                intersect: false,
+            },
+            onClick(evt, elements) {
+                if(elements.length > 0) {
+                const index = elements[0].index;
+                const item = history[index];
+                document.getElementById('info').textContent = `Дата: ${item.date}, Курс: ${item.rate.toFixed(4)} RUB`;
+                chart.data.datasets[0].backgroundColor = data.map((_, i) => i === index ? '#9f6' : '#306');
+                chart.update();
+                }
+            },
+            scales: {
+                x: {
+                ticks: {
+                    maxRotation: 45,
+                    minRotation: 45,
+                    font: { size: 10 }
+                },
+                grid: { display: false }
+                },
+                y: {
+                beginAtZero: false,
+                ticks: { font: { size: 12 } },
+                grid: { color: 'rgba(0,0,0,0.1)' }
+                }
+            },
+            maintainAspectRatio: false,
+            responsive: false
+            }
+        });
+        }
+
+        async function main() {
+        const rate = await fetchTodayRate();
+        setupCalculator(rate);
+        historyRates = await fetchHistoryRates(30);
+        renderChart(historyRates);
+        }
+
+        main();
+  </script>
+</body>
+</html>
